@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">"公共库"</string>
+    <string name="amaps_api_key">""</string>
+    <string name="loading_waiting">加载中，请稍后...</string>
+    <string name="loading_more">加载更多</string>
+    <!--ProgressView相关的预定义字符串 -->
+    <string name="progressViewErrorButton">重试</string>
+    <string name="progressViewEmptyTitlePlaceholder">空状态-标题</string>
+    <string name="progressViewEmptyContentPlaceholder">空状态-内容</string>
+    <string name="progressViewErrorTitlePlaceholder">错误状态-标题</string>
+    <string name="progressViewErrorContentPlaceholder">错误状态-内容</string>
+
+    <!-- -->
+
+    <!--下拉刷新-->
+    <string-array name="storehouse">
+        <item>0,35,12,42,</item>
+        <item>12,42,24,35,</item>
+        <item>24,35,12,28,</item>
+        <item>0,35,12,28,</item>
+        <item>0,21,12,28,</item>
+        <item>12,28,24,21,</item>
+        <item>24,35,24,21,</item>
+        <item>24,21,12,14,</item>
+        <item>0,21,12,14,</item>
+        <item>0,21,0,7,</item>
+        <item>12,14,0,7,</item>
+        <item>12,14,24,7,</item>
+        <item>24,7,12,0,</item>
+        <item>0,7,12,0,</item>
+    </string-array>
+
+    <integer-array name="google_colors">
+        <item>@color/red</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+    </integer-array>
+    <!--下拉刷新结束-->
+
+    <!--进度框-->
+    <string name="app_dialog_progress_default">加载中，请稍后...</string>
+
+</resources>

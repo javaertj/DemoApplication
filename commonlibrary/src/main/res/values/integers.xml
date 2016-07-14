@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="card_flip_time_full">300</integer>
+    <integer name="card_flip_time_half">150</integer>
+    <integer name="animator_activity">300</integer>
+    <integer name="animator_loading_bus">50</integer>
+
+</resources>

@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            // 显示log
+            buildConfigField "boolean", "ENABLE_DEBUG", "true"
+            minifyEnabled false
+        }
+        debug{
+            // 显示log
+            buildConfigField "boolean", "ENABLE_DEBUG", "true"
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/universal-image-loader-1.9.4.jar')
+    compile files('libs/zxing-android-core-3.1.0.jar')
+    compile files('libs/zxing-android-integration-3.1.0.jar')
+    compile files('libs/zxing-core-3.1.0.jar')
+    compile files('libs/ormlite-android-4.49-SNAPSHOT.jar')
+    compile files('libs/ormlite-core-4.49-SNAPSHOT.jar')
+    //高德地图
+    compile files('libs/AMap_Location_v1.4.1_20150917.jar')
+    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
+    compile files('libs/AMap_Search_v2.6.0_20150914.jar')
+    //recycleview
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support:design:23.2.1'
+    //rest+rxAndroid
+    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.3.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.3.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    // Retrofit适配RxJava
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    // Retrofit Gson数据转换器
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
+    //友盟推送
+    compile files('com.umeng.message.lib_v2.6.0.jar')
+    //友盟统计
+    compile files('umeng-analytics-v5.6.3.jar')
+//    compile 'com.umeng.analytics:analytics:latest.integration'
+    //友盟自动升级
+    compile files('umeng-update-v2.6.0.1.jar')
+    //支付宝
+    compile files('alipaySdk-20151112.jar')
+    //下拉刷新
+    //compile 'in.srain.cube:ultra-ptr:1.0.10'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+//    compile 'in.srain.cube:ptr-load-more:1.0.2'
+    //ViewHelper
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile files('libs/libammsdk.jar')
+    compile files('libs/butterknife-7.0.1.jar')
+    compile 'com.github.chrisbanes.photoview:library:1.2.3'
+    compile files('libs/android-support-v7-palette.jar')
+    //圆角
+    compile 'com.makeramen:roundedimageview:2.2.1'
+    //上传图片
+    compile 'com.upyun:upyun-android-sdk:1.0.1'
+    //权限库
+    compile 'com.lovedise:permissiongen:0.0.6'
+    //多级联动
+//    compile 'com.bigkoo:pickerview:2.0.8'
+    //图片选择器
+    compile 'com.squareup.picasso:picasso:2.4.0'
+    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile "com.squareup.okhttp:okhttp:1.6.0"
+    compile "com.squareup.okhttp:okhttp-urlconnection:1.6.0"
+    //bus
+    compile 'com.mcxiaoke.xbus:bus:1.0.1'
+    //sweetDialog
+    compile 'cn.pedant.sweetalert:library:1.3'
+    //阻尼scrollview
+    compile 'me.everything:overscroll-decor-android:1.0.1'
+}
+

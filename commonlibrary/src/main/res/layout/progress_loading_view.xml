@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loadingStateRelativeLayout"
+    android:layout_width="wrap_content"
+    android:background="@color/float_transparent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/loading_kit_style1_background"
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/loadingStateProgressBar"
+            style="@style/custom_progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layerType="software"
+              />
+
+        <TextView
+            android:id="@+id/loadingstateTitleview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="gone" />
+
+    </LinearLayout>
+</RelativeLayout>

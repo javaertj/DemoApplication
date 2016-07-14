@@ -1,0 +1,86 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <declare-styleable name="SlideMenu" >
+        <attr name="slide_mode" format="integer">
+            <!-- 菜单、内容都一起移动-->
+            <flag name="MODE_NORMAL" value="1"/>
+            <!-- 菜单不移动-->
+            <flag name="MODE_SCROLL_CONTENT" value="2"/>
+            <!-- 菜单、内容移动的同时还缩放menu和content视图-->
+            <flag name="MODE_SCROLL_WIDTH_SCALE" value="3"/>
+        </attr>
+        <!-- 菜单的宽度 dp-->
+        <attr name="slide_menu_width" format="dimension"/>
+        <!-- 菜单内容移动（菜单父视图不动）-->
+        <attr name="slide_menu_content_enabled" format="boolean"/>
+        <!-- 菜单内容移动的系数-->
+        <attr name="menu_content_move_coefficient" format="float"/>
+        <!-- 菜单缩放的比例-->
+        <attr name="menu_scale_coefficient" format="float"/>
+        <!-- 内容缩放的比例-->
+        <attr name="content_scale_coefficient" format="float"/>
+        <!-- 菜单透明的比例-->
+        <attr name="menu_alpha_coefficient" format="float"/>
+        <!-- 内容透明的比例-->
+        <attr name="content_alpha_coefficient" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundScanningImageView">
+        <!-- 外圆框的宽度-->
+        <attr name="out_stroke_width" format="float"/>
+        <!-- 是否开启扫描-->
+        <attr name="enable_scan" format="boolean"/>
+        <!-- 扫描的速度 pixels-->
+        <attr name="scan_speed" format="float"/>
+        <!-- 是否裁剪为圆形-->
+        <attr name="enable_clipPath_round" format="boolean"/>
+        <!-- 图片和外圆的间隔宽度-->
+        <attr name="stroke_width" format="float"/>
+        <!-- 外圆的宽度-->
+        <attr name="out_stroke_color" format="color"/>
+        <!-- 外圆的透明度-->
+        <attr name="out_stroke_alpha" format="integer"/>
+        <!-- 扫描线的渐变高度-->
+        <attr name="scan_line_height" format="float"/>
+        <!-- 扫描下呢绘制时间间隔-->
+        <attr name="scan_invalidate_time" format="integer"/>
+
+    </declare-styleable>
+
+    <style name="MyWidget" parent="@android:style/Theme" />
+
+    <style name="MyWidget.TabText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/tab_indicator_text</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+    </style>
+
+    <!-- Common list view styles -->
+    <style name="MyWidget.ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:cacheColorHint">#00ffffff</item>
+        <item name="android:dividerHeight">2px</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+
+
+</resources>
