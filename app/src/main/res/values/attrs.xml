@@ -92,4 +92,5 @@
         <attr name="float_layout" format="reference" />
         <attr name="background_resources" format="reference|color" />
     </declare-styleable>
+
 </resources>

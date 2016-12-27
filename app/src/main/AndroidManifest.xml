@@ -4,6 +4,7 @@
     package="com.ykbjson.demo">
 
     <application
+        android:largeHeap="true"
         android:name=".app.DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,11 +14,9 @@
         tools:replace="android:icon">
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,6 +24,8 @@
         <activity android:name=".activity.TestPullToZoomActivity" />
         <activity android:name=".activity.ExamineAssistantActivity" />
         <activity android:name=".activity.TestTravelListActivity" />
+        <activity android:name=".activity.TestJsActivity"/>
+
 
     </application>
 

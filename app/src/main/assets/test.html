@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kljlknljomlm</title>
+
+</head>
+<body>
+<input type="button" value="测试分享"
+       onclick="share(JSON.stringify({'action':'share',
+       'param':{'link':'http://baidu.com',
+       'title':'this is title',
+       'content':'this is content',
+       'pic':'http://images.simpletour.com/simpletour/images/app_product/66f99a9b8f29b9d22373d5433850dab5.png'}}))"/>
+
+<a href="bdapp://map/map?UISettingDemo">测试拉起UISettingDemo页面</a>
+<a href="bdapp://map/search?BusLineSearchDemo">测试拉起BusLineSearchDemo页面</a>
+
+
+<a href="simpletourapp://app/tourismPackage?id=322">测试拉起车票套餐页面</a>
+<a href="simpletourapp://app/scenic?id=26">测试拉起景点详情页面</a>
+<a href="simpletourapp://app/lines">测试拉起线路页面</a>
+<a href="simpletourapp://app/line?id=1">测试拉起线路详情页面</a>
+<a href="simpletourapp://app/gift?id=266">测试拉起伴手礼页面</a>
+<a href="simpletourapp://app/shuttle_bus?id=269">测试拉起接驳车页面</a>
+<a href="simpletourapp://app/">测试拉起APP页面</a>
+<a href="simpletourapp://app?lll">测试不支持的协议</a>
+
+<script>
+    function share(param){
+       simpletour.open(param);
+    }
+
+
+
+</script>
+</body>
+</html>
+
+<!--<html>-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
+
+<!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+<!--<meta name="apple-mobile-web-app-status-bar-style" content="black"/>-->
+
+<!--<title>this's a demo</title>-->
+<!--<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+<!--<a id="J-call-app" href="javascript:;" class="label">立即打开&gt;&gt;</a>-->
+<!--<input id="J-download-app" type="hidden" name="storeurl" value="http://a.app.qq.com/o/simple.jsp?pkgname=com.simpletour.client">-->
+<!--</div>-->
+
+<!--<a href="bdapp://map/map?UISettingDemo">测试拉起UISettingDemo页面</a>-->
+<!--<a href="bdapp://map/search?BusLineSearchDemo">测试拉起BusLineSearchDemo页面</a>-->
+<!--<a class="click" href="#">测试拉起车票套餐页面</a>-->
+
+
+<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>-->
+
+<!--<script>-->
+<!--$(function(){-->
+<!--$('.click').click(function(e){-->
+<!--e.preventDefault();-->
+<!--$.post("http://127.0.0.1:9527",{"name":"0021652156456545"},function(result){-->
+<!--$("body").html(result);-->
+<!--});-->
+<!--})-->
+<!--&lt;!&ndash;$.post("http://192.168.3.167:9527",{"name":"0021652156456545"},function(result){&ndash;&gt;-->
+<!--&lt;!&ndash;$("body").html(result);&ndash;&gt;-->
+<!--&lt;!&ndash;});&ndash;&gt;-->
+<!--});-->
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

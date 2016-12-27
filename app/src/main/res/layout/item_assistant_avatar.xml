@@ -1,47 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="170dp"
-    android:clipChildren="false"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:background="@color/float_transparent"
-    android:gravity="center">
 
-    <ImageView
-        android:layout_width="@dimen/dimen_1"
-        android:layout_height="@dimen/dimen_10"
-        android:layout_gravity="top|center_horizontal"
-        android:src="@color/sip_gray_dark" />
+<com.ykbjson.demo.customview.otherview.SwipeDeleteView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170dp">
 
     <LinearLayout
-        android:id="@+id/layout_content"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical">
+        android:id="@id/swipe_control_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right">
 
-        <com.ykbjson.demo.customview.otherview.CircleImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="@dimen/dimen_55"
-            android:layout_height="@dimen/dimen_55"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dimen_10"
-            android:src="@drawable/guide_head" />
-
-        <TextView
-            android:id="@+id/tv_name"
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="蒋一梅" />
+            android:text="删除 " />
+
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="@dimen/dimen_1"
-        android:layout_height="@dimen/dimen_10"
-        android:layout_gravity="bottom|center_horizontal"
-        android:src="@color/sip_gray_dark" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@id/swipe_content_id"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:clipChildren="false"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_1"
+            android:layout_height="@dimen/dimen_10"
+            android:layout_gravity="top|center_horizontal"
+            android:src="@color/sip_gray_dark" />
+
+        <LinearLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.ykbjson.demo.customview.otherview.CircleImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/dimen_55"
+                android:layout_height="@dimen/dimen_55"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:src="@drawable/guide_head" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:gravity="center"
+                android:text="蒋一梅" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_1"
+            android:layout_height="@dimen/dimen_10"
+            android:layout_gravity="bottom|center_horizontal"
+            android:src="@color/sip_gray_dark" />
+
+    </LinearLayout>
+
+</com.ykbjson.demo.customview.otherview.SwipeDeleteView>

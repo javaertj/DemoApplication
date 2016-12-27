@@ -8,12 +8,18 @@ android {
         applicationId "com.ykbjson.demo"
         minSdkVersion 15
         targetSdkVersion 22
+
+        multiDexEnabled = true
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
             minifyEnabled false
+            //移除无用的资源文件
+            shrinkResources true
+            //Zipalign优化
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

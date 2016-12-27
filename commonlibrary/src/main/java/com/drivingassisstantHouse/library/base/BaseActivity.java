@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.drivingassisstantHouse.library.MApplication;
 import com.drivingassisstantHouse.library.R;
 import com.drivingassisstantHouse.library.data.OnNetWorkEvent;
+import com.drivingassisstantHouse.library.point.IIntentFactory;
 import com.drivingassisstantHouse.library.tools.SLog;
 import com.mcxiaoke.bus.annotation.BusReceiver;
 import com.umeng.analytics.MobclickAgent;
@@ -28,6 +29,7 @@ import com.umeng.message.PushAgent;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 
@@ -38,7 +40,7 @@ import butterknife.ButterKnife;
  * @author sunji
  * @version 1.0
  */
-public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity, IIntentFactory {
     /***
      * 整个应用Applicaiton
      **/
@@ -72,6 +74,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     protected Toolbar toolbar;
 
+    private String queenId;
+
     protected static class BaseHandler extends Handler {
         private WeakReference<IBaseActivity> baseActivity;
 
@@ -94,12 +98,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         mApplication = (MApplication) getApplicationContext();
         // 将当前Activity压入栈
         context = new WeakReference<Activity>(this);
-        context = new WeakReference<Activity>(this);
+        queenId = getClass().getName() + "&_class" + String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
         mApplication.pushTask(context);
-
         // 实例化共通操作
         mOperation = new Operation(this);
-
         // 初始化参数
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -183,6 +185,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         super.onDestroy();
         mApplication.removeTask(context);
         SLog.d("BaseActivity-->onDestroy()");
+    }
+
+    public String getQueenId() {
+        return queenId;
     }
 
     /**
@@ -286,7 +292,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
         mAnimationType = NONE;
     }
-
 
 
     @BusReceiver

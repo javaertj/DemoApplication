@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.view.LayoutInflaterFactory;
@@ -22,22 +21,23 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ykbjson.demo.R;
-import com.ykbjson.demo.tools.ToolUnit;
+import com.ykbjson.demo.customview.ptrheader.CustomerPtrHandler;
+import com.ykbjson.demo.customview.ptrheader.PullLoadingView;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.header.MaterialHeader;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    PtrClassicFrameLayout layout;
-
+    CustomerPtrHandler header;
+    PtrClassicFrameLayout ptrRefresh;
+    PullLoadingView pullLoadingView;
     private Runnable testTunner = new Runnable() {
         @Override
         public void run() {
-            layout.refreshComplete();
+            ptrRefresh.refreshComplete();
+            pullLoadingView.setMode(2);
         }
     };
 
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pullLoadingView = (PullLoadingView) findViewById(R.id.iv_pull);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, TestJsActivity.class));
             }
         });
 
@@ -77,36 +77,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        layout = (PtrClassicFrameLayout) findViewById(R.id.ptr_frame);
+        ptrRefresh = (PtrClassicFrameLayout) findViewById(R.id.ptr_frame);
         initRefreshHandler();
     }
+
 
     /**
      * 初始化下拉刷新
      */
     private void initRefreshHandler() {
-        final MaterialHeader header = new MaterialHeader(this);
-        int[] colors = getResources().getIntArray(R.array.google_colors);
-        header.setColorSchemeColors(colors);
-        header.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
-        header.setPadding(0, ToolUnit.dipTopx(15), 0, ToolUnit.dipTopx(10));
-//        header.setPtrFrameLayout(layout_refresh);
-        layout.setLoadingMinTime(1000);
-        layout.setDurationToCloseHeader(1500);
-        layout.setHeaderView(header);
-        layout.addPtrUIHandler(header);
-
-        layout.setPtrHandler(new PtrHandler() {
+//        ptrRefresh.setEnabled(false);
+        header = new CustomerPtrHandler(this);
+        ptrRefresh.setHeaderView(header);
+        ptrRefresh.addPtrUIHandler(header);
+        ptrRefresh.setPullToRefresh(false);
+        ptrRefresh.disableWhenHorizontalMove(true);//避免跟水平滑动的组件冲突
+        ptrRefresh.setLastUpdateTimeRelateObject(this);
+        ptrRefresh.setLoadingMinTime(2000);
+        ptrRefresh.setDurationToCloseHeader(3000);
+        ptrRefresh.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
                 return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
             }
 
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                frame.postDelayed(testTunner, 1000);
+            public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
+                ptrRefresh.postDelayed(testTunner, 3000);
             }
         });
+    }
+
+//    /**
+//     * 初始化下拉刷新
+//     */
+//    private void initRefreshHandler() {
+//        final MaterialHeader header = new MaterialHeader(this);
+//        int[] colors = getResources().getIntArray(R.array.google_colors);
+//        header.setColorSchemeColors(colors);
+//        header.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
+//        header.setPadding(0, ToolUnit.dipTopx(15), 0, ToolUnit.dipTopx(10));
+////        header.setPtrFrameLayout(layout_refresh);
+//        layout.setLoadingMinTime(1000);
+//        layout.setDurationToCloseHeader(1500);
+//        layout.setHeaderView(header);
+//        layout.addPtrUIHandler(header);
+//
+//        layout.setPtrHandler(new PtrHandler() {
+//            @Override
+//            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+//                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+//            }
+//
+//            @Override
+//            public void onRefreshBegin(PtrFrameLayout frame) {
+//                frame.postDelayed(testTunner, 1000);
+//            }
+//        });
 
 //        layout.setLastUpdateTimeKey(lastUpdateTime);
 //        layout.setLoadingMinTime(1000);
@@ -123,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                getData();
 //            }
 //        });
-    }
+//    }
 
 
     @Override

@@ -1,6 +1,7 @@
 package com.ykbjson.demo.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.drivingassisstantHouse.library.base.BaseActivity;
 import com.drivingassisstantHouse.library.base.SimpleAdapterHolder;
+import com.drivingassisstantHouse.library.data.IntentBean;
 import com.nineoldandroids.view.ViewHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ykbjson.demo.R;
@@ -30,6 +32,8 @@ import butterknife.Bind;
 public class TestTravelListActivity extends BaseActivity {
     @Bind(R.id.wheel)
     WheelView wheel;
+    @Bind(R.id.tv_web)
+    TextView textView;
     private ArrayList<AssistantManager> assistantManagers = new ArrayList<>();
     private TravelListAdapter adapter;
 
@@ -67,6 +71,12 @@ public class TestTravelListActivity extends BaseActivity {
             manager.setTourismSections("成都-都江堰-青城山");
             assistantManagers.add(manager);
         }
+        Intent intent = getIntent();
+        if (null != intent) {
+            if (intent.hasExtra("data")) {
+                textView.setText(intent.getStringExtra("data"));
+            }
+        }
     }
 
 
@@ -89,6 +99,10 @@ public class TestTravelListActivity extends BaseActivity {
         dataChange();
     }
 
+    @Override
+    public IntentBean create() {
+        return null;
+    }
 
     private class TravelListAdapter extends WheelAdapter<AssistantManager> {
         private int mSelectPosition;

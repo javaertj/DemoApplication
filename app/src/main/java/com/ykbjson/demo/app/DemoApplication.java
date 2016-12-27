@@ -2,6 +2,9 @@ package com.ykbjson.demo.app;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
+import android.support.multidex.MultiDex;
 
 import com.drivingassisstantHouse.library.MApplication;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -26,15 +29,16 @@ import java.io.File;
  */
 public class DemoApplication extends MApplication {
     private static DemoApplication instance;
+    private BaseHandler baseHandler = new BaseHandler();
 
-   public static DemoApplication getInstance(){
+    public static DemoApplication getInstance() {
         return instance;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance=this;
+        instance = this;
         init(this);
     }
 
@@ -48,7 +52,11 @@ public class DemoApplication extends MApplication {
 
     }
 
-    private   void init(Context context) {
+    public synchronized BaseHandler obtain() {
+        return baseHandler;
+    }
+
+    private void init(Context context) {
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.drawable.empty_photo)// 空uri时的默认图片
                 .showImageOnFail(R.drawable.empty_photo)// 加载失败时的默认图片
@@ -64,8 +72,8 @@ public class DemoApplication extends MApplication {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .defaultDisplayImageOptions(defaultOptions)
 //		.memoryCacheExtraOptions(480, 800)//缓存文件的最大长宽，默认屏幕宽高
-                        // Can slow ImageLoader, use it carefully (Better don't use it)设置缓存的详细信息，最好不要设置这个
-                        // .discCacheExtraOptions(480, 800, CompressFormat.JPEG, 75,null)
+                // Can slow ImageLoader, use it carefully (Better don't use it)设置缓存的详细信息，最好不要设置这个
+                // .discCacheExtraOptions(480, 800, CompressFormat.JPEG, 75,null)
                 .threadPoolSize(3)// 线程池内加载的数量
                 .threadPriority(Thread.NORM_PRIORITY - 2)// 线程优先级
         /*
@@ -80,8 +88,8 @@ public class DemoApplication extends MApplication {
 		 * size of this image (if it exists) will be removed from memory
 		 * cache before.
 		 */
-                        // .denyCacheImageMultipleSizesInMemory()
-                        // You can pass your own memory cache implementation
+                // .denyCacheImageMultipleSizesInMemory()
+                // You can pass your own memory cache implementation
                 .memoryCache(new UsingFreqLimitedMemoryCache(10 * 1024 * 1024))
 //                .memoryCache(new WeakMemoryCache())
                 .memoryCacheSize(10 * 1024 * 1024)//内存缓存20MB
@@ -97,5 +105,21 @@ public class DemoApplication extends MApplication {
 
         // 全局初始化此配置
         ImageLoader.getInstance().init(config);
+
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        MultiDex.install(base);
+        super.attachBaseContext(base);
+    }
+
+    private static class BaseHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+        }
+    }
+
 }

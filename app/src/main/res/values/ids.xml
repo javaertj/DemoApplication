@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="scroll_header_view" type="id" />
+
+    <item name="swipe_content_id" type="id" />
+
+    <item name="swipe_control_id" type="id" />
 </resources>

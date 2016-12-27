@@ -2,8 +2,6 @@ package com.drivingassisstantHouse.library.tools;
 
 import android.util.Log;
 
-import com.drivingassisstantHouse.library.BuildConfig;
-
 /**
  * 包名：com.drivingassisstantHouse.library.tools
  * 描述：日志工具
@@ -11,7 +9,7 @@ import com.drivingassisstantHouse.library.BuildConfig;
  * 日期：2015/12/9
  */
 public class SLog {
-    public static boolean DEVELOP_MODE= BuildConfig.ENABLE_DEBUG;
+    public static boolean DEVELOP_MODE= true;
     private static String tag = "[AppName]";
     private static int logLevel = Log.DEBUG;//Log.ERROR
     private static final String mClassName="简途旅行";

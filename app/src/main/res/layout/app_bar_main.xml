@@ -10,16 +10,15 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -32,6 +31,7 @@
         app:layout_anchorGravity="bottom|end"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:tabGravity="fill">
+
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
@@ -56,13 +56,13 @@
     </android.support.design.widget.TabLayout>
 
     <TextView
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_anchor="@id/tabs"
-        app:layout_anchorGravity="bottom|end"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:gravity="center"
-        android:text="Helloafafafaafaf World!" />
+        android:text=" "
+        app:layout_anchor="@id/tabs"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ptr_frame"
@@ -86,36 +86,76 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <com.ykbjson.demo.customview.otherview.SwipeDeleteView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_100">
+
+
+                    <LinearLayout
+                        android:id="@id/swipe_control_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:background="@color/blueviolet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="删除 " />
+
+                        <Button
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/dimen_5"
+                            android:gravity="center"
+                            android:text="标记 " />
+
+                        <Button
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="置顶 " />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@id/swipe_content_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/sip_red">
+
+                        <TextView
+                            android:padding="@dimen/dimen_10"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center_vertical"
+                            android:text="Hello Wｓｎｇｊｋｓｎｎｉ方法Afafafa烦烦烦烦烦烦烦烦烦ａｌｆｓｆ" />
+
+                    </LinearLayout>
+
+
+                </com.ykbjson.demo.customview.otherview.SwipeDeleteView>
+
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="200dp"
+                    android:layout_height="50dp"
                     android:text="Hello World!" />
+
+                <com.ykbjson.demo.customview.ptrheader.PullLoadingView
+                    android:id="@+id/iv_pull"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
-                    android:text="Helldfaffafafafaafaf!"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:text="Hello World!" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:text="Hello World!" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:text="Hello World!" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:text="Hello World!" />
+                    android:text="!" />
 
 
             </LinearLayout>
