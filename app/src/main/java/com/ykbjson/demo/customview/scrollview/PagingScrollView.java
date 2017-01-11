@@ -75,7 +75,9 @@ public class PagingScrollView extends ScrollView {
         int dividerTop = getChildTop(dividerView, dividerView.getTop());
         dividerY = dividerTop + dividerHeight - getHeight();
         secondTop = getChildTop(secondView, secondView.getTop());
-
+        if (secondTop <= getHeight() || dividerTop <= getHeight()) {
+            throw new IllegalArgumentException("firstPage's  height must be more than the parent's height");
+        }
     }
 
     @Override

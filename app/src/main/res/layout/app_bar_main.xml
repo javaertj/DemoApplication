@@ -89,7 +89,7 @@
 
                 <com.ykbjson.demo.customview.otherview.SwipeDeleteView
                     android:layout_width="match_parent"
-                    android:layout_height="800dp">
+                    android:layout_height="600dp">
 
                     <LinearLayout
                         android:id="@id/swipe_control_id"
