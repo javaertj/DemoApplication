@@ -107,7 +107,7 @@ public abstract class ToolImage {
                          EXACTLY_STRETCHED:图片会缩放到目标大小完全
                          IN_SAMPLE_INT:图像将被二次采样的整数倍
                          IN_SAMPLE_POWER_OF_2:图片将降低2倍，直到下一减少步骤，使图像更小的目标大小
-                         NONE:图片不会调整
+                         SHOW_NONE:图片不会调整
                          ***/
                 .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
                         // 设置图片的解码类型
@@ -147,7 +147,7 @@ public abstract class ToolImage {
                          EXACTLY_STRETCHED:图片会缩放到目标大小完全
                          IN_SAMPLE_INT:图像将被二次采样的整数倍
                          IN_SAMPLE_POWER_OF_2:图片将降低2倍，直到下一减少步骤，使图像更小的目标大小
-                         NONE:图片不会调整
+                         SHOW_NONE:图片不会调整
                          ***/
                 .imageScaleType(ImageScaleType.EXACTLY)
                         // 设置图片的解码类型

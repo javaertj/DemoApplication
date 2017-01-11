@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.ykbjson.demo.R;
 import com.ykbjson.demo.customview.ptrheader.CustomerPtrHandler;
-import com.ykbjson.demo.customview.ptrheader.PullLoadingView;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -32,12 +31,10 @@ import in.srain.cube.views.ptr.PtrHandler;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     CustomerPtrHandler header;
     PtrClassicFrameLayout ptrRefresh;
-    PullLoadingView pullLoadingView;
     private Runnable testTunner = new Runnable() {
         @Override
         public void run() {
             ptrRefresh.refreshComplete();
-            pullLoadingView.setMode(2);
         }
     };
 
@@ -56,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pullLoadingView = (PullLoadingView) findViewById(R.id.iv_pull);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -86,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * 初始化下拉刷新
      */
     private void initRefreshHandler() {
-//        ptrRefresh.setEnabled(false);
+        ptrRefresh.setEnabled(false);
         header = new CustomerPtrHandler(this);
         ptrRefresh.setHeaderView(header);
         ptrRefresh.addPtrUIHandler(header);
@@ -161,6 +157,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

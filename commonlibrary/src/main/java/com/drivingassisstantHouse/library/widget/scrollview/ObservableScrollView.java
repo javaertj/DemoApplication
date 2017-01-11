@@ -1,18 +1,11 @@
 package com.drivingassisstantHouse.library.widget.scrollview;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
 import android.widget.ScrollView;
+
+import java.util.ArrayList;
 
 /**
  * 观察view scrollview
@@ -20,141 +13,113 @@ import android.widget.ScrollView;
  */
 public class ObservableScrollView extends ScrollView {
 
-	public interface ScrollViewListener {
+	private boolean interceptTouchAnyWay = true;
 
-		void onScrollChanged(ObservableScrollView scrollView, int x, int y,
-							 int oldx, int oldy);
-
-	}
-
-	private ScrollViewListener scrollViewListener = null;
+	private ArrayList<Callbacks> mCallbacks = new ArrayList<>();
 
 	public ObservableScrollView(Context context) {
-		super(context);
-	}
-
-	public ObservableScrollView(Context context, AttributeSet attrs,
-								int defStyle) {
-		super(context, attrs, defStyle);
+		this(context, null);
 	}
 
 	public ObservableScrollView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		setOverScrollMode(OVER_SCROLL_NEVER);
 	}
 
-	public void setScrollViewListener(ScrollViewListener scrollViewListener) {
-		this.scrollViewListener = scrollViewListener;
+	public ObservableScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		setOverScrollMode(OVER_SCROLL_NEVER);
 	}
 
 	@Override
-	protected void onScrollChanged(int x, int y, int oldx, int oldy) {
-		super.onScrollChanged(x, y, oldx, oldy);
-		if (scrollViewListener != null) {
-			scrollViewListener.onScrollChanged(this, x, y, oldx, oldy);
+	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+		super.onScrollChanged(l, t, oldl, oldt);
+		handleOnScrollCallback(l, t, oldl, oldt);
+	}
+
+	/**
+	 * 重写此方法让scrollview一直拦截touch事件，解决当scrollview内容没超出屏幕时也能拦截touch事件
+	 * 因为源码 onInterceptTouchEvent 里有如下说明
+	 * Don't try to intercept touch if we can't scroll anyway.
+	 * if (getScrollY() == 0 && !canScrollVertically(1)) {
+	 * return false;
+	 * }
+	 */
+	@Override
+	public boolean canScrollVertically(int direction) {
+		return interceptTouchAnyWay || super.canScrollVertically(direction);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		if (!mCallbacks.isEmpty()) {
+			switch (ev.getActionMasked()) {
+				case MotionEvent.ACTION_DOWN:
+					handleOnDownMotionEvent();
+					break;
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					handleOnUpOrCancelMotionEvent();
+					break;
+			}
+		}
+		return super.onTouchEvent(ev);
+	}
+
+	@Override
+	public int computeVerticalScrollRange() {
+		return super.computeVerticalScrollRange();
+	}
+
+	public void setInterceptTouchAnyWay(boolean interceptTouchAnyWay) {
+		this.interceptTouchAnyWay = interceptTouchAnyWay;
+	}
+
+	private void handleOnDownMotionEvent() {
+		if (checktock()) {
+			return;
+		}
+		for (Callbacks callbacks : mCallbacks) {
+			callbacks.onDownMotionEvent();
 		}
 	}
 
+	private void handleOnUpOrCancelMotionEvent() {
+		if (checktock()) {
+			return;
+		}
+		for (Callbacks callbacks : mCallbacks) {
+			callbacks.onUpOrCancelMotionEvent();
+		}
+	}
 
-//	// 拖动的距离 size = 4 的意思 只允许拖动屏幕的1/4
-//	private static final int size = 4;
-//	private View inner;
-//	private float y;
-//	private Rect normal = new Rect();;
-//
-//
-//
-//
-//
-//	@Override
-//	protected void onFinishInflate() {
-//		super.onFinishInflate();
-//		if (getChildCount() > 0) {
-//			inner = getChildAt(0);
-//		}
-//	}
-//
-//	@Override
-//	public boolean onTouchEvent(MotionEvent ev) {
-//		if (inner == null) {
-//			return super.onTouchEvent(ev);
-//		} else {
-//			commOnTouchEvent(ev);
-//		}
-//		return super.onTouchEvent(ev);
-//	}
+	private void handleOnScrollCallback(int l, int t, int oldl, int oldt) {
+		if (checktock()) {
+			return;
+		}
+		for (Callbacks callbacks : mCallbacks) {
+			callbacks.onScrollCallback(l, t, oldl, oldt);
+		}
+	}
 
+	private boolean checktock() {
+		return mCallbacks.isEmpty();
+	}
 
+	public boolean addScrollCallbacks(Callbacks listener) {
+		return !mCallbacks.contains(listener) && mCallbacks.add(listener);
+	}
 
+	public boolean removeScrollCallbacks(Callbacks listener) {
+		return mCallbacks.contains(listener) && mCallbacks.remove(listener);
+	}
 
-//	public void commOnTouchEvent(MotionEvent ev) {
-//		int action = ev.getAction();
-//		switch (action) {
-//			case MotionEvent.ACTION_DOWN:
-//				y = ev.getY();
-//				break;
-//			case MotionEvent.ACTION_UP:
-//				if (isNeedAnimation()) {
-//					// Log.v("mlguitar", "will up and animation");
-//					animation();
-//				}
-//				break;
-//			case MotionEvent.ACTION_MOVE:
-//				final float preY = y;
-//				float nowY = ev.getY();
-//				/**
-//				 * size=4 表示 拖动的距离为屏幕的高度的1/4
-//				 */
-//				int deltaY = (int) (preY - nowY) / size;
-//				// 滚动
-//				// scrollBy(0, deltaY);
-//
-//				y = nowY;
-//				// 当滚动到最上或者最下时就不会再滚动，这时移动布局
-//				if (isNeedMove()) {
-//					if (normal.isEmpty()) {
-//						// 保存正常的布局位置
-//						normal.set(inner.getLeft(), inner.getTop(),
-//								inner.getRight(), inner.getBottom());
-//						return;
-//					}
-//					int yy = inner.getTop() - deltaY;
-//
-//					// 移动布局
-//					inner.layout(inner.getLeft(), yy, inner.getRight(),
-//							inner.getBottom() - deltaY);
-//				}
-//				break;
-//			default:
-//				break;
-//		}
-//	}
-//
-//	// 开启动画移动
-//
-//	public void animation() {
-//		// 开启移动动画
-//		TranslateAnimation ta = new TranslateAnimation(0, 0, inner.getTop(),
-//				normal.top);
-//		ta.setDuration(200);
-//		inner.startAnimation(ta);
-//		// 设置回到正常的布局位置
-//		inner.layout(normal.left, normal.top, normal.right, normal.bottom);
-//		normal.setEmpty();
-//	}
-//
-//	// 是否需要开启动画
-//	public boolean isNeedAnimation() {
-//		return !normal.isEmpty();
-//	}
-//
-//	// 是否需要移动布局
-//	public boolean isNeedMove() {
-//		int offset = inner.getMeasuredHeight() - getHeight();
-//		int scrollY = getScrollY();
-//		if (scrollY == 0 || scrollY == offset) {
-//			return true;
-//		}
-//		return false;
-//	}
+	public interface Callbacks {
+		public void onScrollCallback(int l, int t, int oldl, int oldt);
+
+		public void onDownMotionEvent();
+
+		public void onUpOrCancelMotionEvent();
+	}
 
 }

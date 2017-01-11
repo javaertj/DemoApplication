@@ -7,6 +7,7 @@
     tools:context=".activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:visibility="gone"
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,6 +15,7 @@
 
 
         <android.support.v7.widget.Toolbar
+            android:visibility="gone"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -24,6 +26,7 @@
 
 
     <android.support.design.widget.TabLayout
+        android:visibility="gone"
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_55"
@@ -55,20 +58,10 @@
 
     </android.support.design.widget.TabLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:text=" "
-        app:layout_anchor="@id/tabs"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
     <in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ptr_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimen_55"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         ptr:ptr_duration_to_close="1500"
         ptr:ptr_duration_to_close_header="1500"
@@ -76,20 +69,27 @@
         ptr:ptr_pull_to_fresh="true"
         ptr:ptr_resistance="1.7">
 
-
-        <android.support.v4.widget.NestedScrollView
+        <com.ykbjson.demo.customview.scrollview.PagingScrollView
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <com.ykbjson.demo.customview.otherview.RoundScanningImageView
+                    app:enable_clipPath_round="true"
+                    app:enable_scan="true"
+                    android:src="@drawable/assistant_icon_four"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/dimen_60"
+                    android:layout_height="@dimen/dimen_60" />
 
                 <com.ykbjson.demo.customview.otherview.SwipeDeleteView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_100">
-
+                    android:layout_height="800dp">
 
                     <LinearLayout
                         android:id="@id/swipe_control_id"
@@ -141,26 +141,28 @@
 
                 </com.ykbjson.demo.customview.otherview.SwipeDeleteView>
 
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:background="@color/lightblue"
+                    android:gravity="center"
+                    android:tag="@string/tag_pageDivider"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="Hello World!" />
+                    android:text="--------我是分页标识哦--------" />
 
-                <com.ykbjson.demo.customview.ptrheader.PullLoadingView
-                    android:id="@+id/iv_pull"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:text="!" />
+                    android:tag="@string/tag_pageSecondView"
+                    android:background="@color/sip_red"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="800dp"
+                    android:text="我是第二页的内容哦哦噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢噢" />
+
 
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </com.ykbjson.demo.customview.scrollview.PagingScrollView>
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 

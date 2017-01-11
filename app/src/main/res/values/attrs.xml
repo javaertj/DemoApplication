@@ -93,4 +93,12 @@
         <attr name="background_resources" format="reference|color" />
     </declare-styleable>
 
+
+    <declare-styleable name="CollapsingLayout">
+        <attr name="statusBarColor" format="reference" />
+        <attr name="statusBarAlpha" format="float" />
+        <attr name="needTranslucentStatus" format="boolean" />
+        <attr name="needPullRefresh" format="boolean" />
+    </declare-styleable>
+
 </resources>

@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import com.drivingassisstantHouse.library.base.BaseActivity;
 import com.drivingassisstantHouse.library.data.IntentBean;
 import com.ykbjson.demo.R;
-import com.ykbjson.demo.customview.toolbar.CollapsingLayout;
 
 /**
  * 包名：com.ykbjson.demo.activity
@@ -19,8 +18,7 @@ import com.ykbjson.demo.customview.toolbar.CollapsingLayout;
  * 日期：2016/8/18
  */
 
-public abstract class CollapsingActivity extends BaseActivity implements CollapsingLayout.OnCollapsingCallback {
-    public CollapsingLayout collapsingLayout;
+public abstract class CollapsingActivity extends BaseActivity {
     public LinearLayout contentView;
 
     @Override
@@ -39,14 +37,10 @@ public abstract class CollapsingActivity extends BaseActivity implements Collaps
 
     private void initBaseView() {
         super.setContentView(R.layout.activity_collapsing_base);
-        collapsingLayout = (CollapsingLayout) super.findViewById(R.id.layout_collapsing);
-        collapsingLayout.setCollapsingCallback(this);
-        contentView = collapsingLayout.getScrollContent();
     }
 
     @Override
     public void setContentView(int layoutResID) {
-        collapsingLayout.setUpContentView(layoutResID);
     }
 
     @Override
@@ -59,8 +53,4 @@ public abstract class CollapsingActivity extends BaseActivity implements Collaps
         contentView.addView(view, params);
     }
 
-    @Override
-    public View findViewById(int id) {
-        return collapsingLayout.findViewById(id);
-    }
 }

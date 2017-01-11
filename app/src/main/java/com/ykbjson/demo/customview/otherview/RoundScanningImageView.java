@@ -109,8 +109,8 @@ public class RoundScanningImageView extends ImageView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        centerX = getWidth() / 2;
-        centerY = getHeight() / 2;
+        centerX = w / 2;
+        centerY = h / 2;
     }
 
     /**
